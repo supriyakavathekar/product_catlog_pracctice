@@ -23,7 +23,7 @@
     object-fit: cover;
   }
 
-  .actionBtn {
+  /* .actionBtn {
     position: absolute;
     bottom: 0;
     width: var(--btn-width);
@@ -36,4 +36,11 @@
     outline: none;
     border: none;
     cursor: pointer;
+  } */
+
+  .detailBtn{
+    background-color: var(--secondary-color);
+    position: absolute;
+    bottom: 1rem;
+    color: rgb(61,61,61);
   }

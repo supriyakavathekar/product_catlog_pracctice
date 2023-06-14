@@ -28,7 +28,7 @@ function ProductCard({ product }) {
           <p>Brand: {product.brand}</p>
           <p>Price: EUR {product.price}</p>
         </div>
-        <button className={styles.actionBtn}
+        <button className= {`${styles.detailBtn} actionBtn`}  
         onClick={openProductPage}
         
         >Details</button>

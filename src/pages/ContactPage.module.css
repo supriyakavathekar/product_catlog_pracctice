@@ -1,0 +1,11 @@
+.contactForm {
+    width: 400px;
+  }
+  .label {
+    display: block;
+  }
+  .inputField {
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    width: 90%;
+  }
