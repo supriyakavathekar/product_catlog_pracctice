@@ -1,0 +1,19 @@
+.nav {
+    width: 400px;
+    margin-left: auto;
+    margin-top: 2rem;
+    margin-right: 1rem;
+    display: flex;
+    align-items: center;
+    align-self: flex-end;
+    gap: 1rem;
+    text-transform: uppercase;
+  }
+  .nav a {
+    text-decoration: none;
+    cursor: pointer;
+    color: var(--primary-color);
+    &:hover {
+      color: var(--secondary-color);
+    }
+  }

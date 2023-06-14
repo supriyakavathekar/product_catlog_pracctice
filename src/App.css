@@ -33,3 +33,8 @@
     transform: rotate(360deg);
   }
 } */
+
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+}
