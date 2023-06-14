@@ -1,0 +1,12 @@
+.backBtn {
+    width: 150px;
+    height: 40px;
+    margin: 0 auto;
+    margin-right: 1rem;
+    background-color: transparent;
+    border: 1px solid lightblue;
+    cursor: pointer;
+    &:hover {
+      background-color: rgb(204, 204, 204);
+    }
+  }

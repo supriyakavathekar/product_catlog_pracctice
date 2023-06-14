@@ -88,7 +88,7 @@ function handelsort() {
 
         <label>Sort by price: </label>
         <button onClick={handelsort}
-        className={styles.sortBtn} >
+        className=  {`${styles.sortBtn} actionBtn`} >
         {sortDirection === 'asc' ? 'Low to high' : 'High to low'}
         {/* if sort direcction is ascending then text on the button is low to high otherwise its high to low */}
         </button>

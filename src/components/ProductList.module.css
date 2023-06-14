@@ -9,6 +9,7 @@
   }
   .sortBtn {
     height: 40px;
+    width: 100%;
     background-color: rgb(75, 137, 230);
     outline: none;
     border: none;
@@ -30,7 +31,7 @@
     flex-direction: column;
     gap: 1rem;
   }
-  .actionBtn {
+  /* .actionBtn {
     width: var(--btn-width);
     height: var(--btn-height);
     background-color: var(--primary-color);
@@ -47,4 +48,4 @@
       background-color: var(--secondary-color);
       color: rgb(63, 61, 61);
     }
-  }
+  } */
