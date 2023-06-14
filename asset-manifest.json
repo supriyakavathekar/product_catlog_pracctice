@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/product_catlog_pracctice/static/css/main.96db4b97.css",
+    "main.js": "/product_catlog_pracctice/static/js/main.eec41bb2.js",
+    "index.html": "/product_catlog_pracctice/index.html",
+    "main.96db4b97.css.map": "/product_catlog_pracctice/static/css/main.96db4b97.css.map",
+    "main.eec41bb2.js.map": "/product_catlog_pracctice/static/js/main.eec41bb2.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.96db4b97.css",
+    "static/js/main.eec41bb2.js"
+  ]
+}
