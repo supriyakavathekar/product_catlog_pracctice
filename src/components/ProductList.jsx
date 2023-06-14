@@ -6,9 +6,9 @@ const ProductList = () => {
   const [ products, setProducts ] = useState([]);
   const [ selectedCategory, setSelectedCategory ] = useState([]);
   const [ currentPage, setCurrentPage ] = useState(1);
-
 const [sortDirection, setSortDirection] = useState('asc')
 const [sortedProducts, setSortedProducts] = useState(products)
+const [searchQuery, setsearchQuery] = useState('')
 
 
 
@@ -88,15 +88,31 @@ function handelsort() {
 
         <label>Sort by price: </label>
         <button onClick={handelsort}
-        className={styles.sortbtn} >
+        className={styles.sortBtn} >
         {sortDirection === 'asc' ? 'Low to high' : 'High to low'}
         {/* if sort direcction is ascending then text on the button is low to high otherwise its high to low */}
         </button>
 
+        <input type="text" placeholder='Search...' className={styles.inputField} value={searchQuery}
+        // value mhanje apan je type karu search madhe te .. so te searchqurey mhanun usestate madhe define kelay apan
+        onChange={(e) => setsearchQuery(e.target.value)}
+        // on change mhanje on click sarkha .. jas button sathi on click asta tasa input sathi on change asata
+        // 
+        />
+
 
       </div>
       <div className={styles.cardsWrapper}>
-        {sortedProducts
+        { searchQuery !== '' ?
+         sortedProducts
+         .filter((product) => 
+          product.title.toLowerCase().includes(searchQuery.toLowerCase())
+         )
+         .map((product) => (
+          <ProductCard key={product.id} product={product}/>
+         ))
+        :
+        sortedProducts
           .filter((product) => selectedCategory == '' || product.category === selectedCategory)
           .map((product) => (
             <ProductCard key={ product.id } product={ product } />

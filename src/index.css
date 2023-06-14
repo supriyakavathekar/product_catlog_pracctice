@@ -11,6 +11,12 @@ body {
   /* */ 
 /* } */
 
+:root{
+  --primary-color:rgb(75, 137, 230);
+  --secondary-color: rgb(125,242,242);
+  --btn-width: 150px;
+  --btn-height:40px;
+}
 
 
 .section {
