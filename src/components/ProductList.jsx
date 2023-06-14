@@ -1,41 +1,75 @@
-import React, { useEffect, useState } from 'react'
-import ProductCard from './ProductCard';
+import React, { useEffect, useState } from 'react';
+import ProductCard  from './ProductCard';
 import styles from './ProductList.module.css';
 
+const ProductList = () => {
+  const [ products, setProducts ] = useState([]);
+  const [ selectedCategory, setSelectedCategory ] = useState([]);
+  const [ currentPage, setCurrentPage ] = useState(1);
+
+const [sortDirection, setSortDirection] = useState('asc')
+const [sortedProducts, setSortedProducts] = useState(products)
 
 
-function ProductList() {
-
-    const [products, setproducts] = useState([])
-    const [selectedCategory, setselectedCategory] = useState([])
 
 
+  const categories = [...new Set(products.map((product) => product.category))];
+  const limit = 30;
+  const handleCategorySelect = (event) => {
+    setSelectedCategory(event.target.value);
+  };
+
+function handelsort() {
+  const direction = sortDirection === 'asc' ? 'desc' : 'asc';
+  setSortDirection(direction);
+
+  const sorted = products.slice().sort((a,b)=> {
+   
+    if (direction === 'asc') {
+      return a.price - b.price;
+    } else{
+      return b.price - a.price
+    };
+
+  })
+  setSortedProducts(sorted);
+
+}
+  
 
 
 
-    const categories = [...new Set(products.map((product) => product.category))]
 
-    useEffect(() => {
-        fetch('https://dummyjson.com/products')
-        .then((response) => response.json())
-        .then((data) => {
-            setproducts(data.products);
-            console.log(data.products);
-        })
-        .catch((error) =>{
-        console.log('Eroor fetcching product', error);
-        })
-        
-    }, [])
-
-    const handleCategorySelect = (event) => {
-      setselectedCategory(event.target.value)
+  const fetchMoreProducts = async (limit, currentPage) => {
+    try {
+      setCurrentPage(currentPage + 1);
+      if (currentPage > 3) {
+        alert('No more products to load');
+        return;
+      }
+      const response = await fetch(`https://dummyjson.com/products?limit=${limit}&skip=${currentPage * limit}`);
+      const data = await response.json();
+      setProducts([...products, ...data.products]);
+      setSortedProducts([...sortedProducts,...data.products]);
+    } catch (error) {
+      console.error('Error fetching products:', error);
     }
-
+  };
+  useEffect(() => {
+    fetch('https://dummyjson.com/products')
+      .then((response) => response.json())
+      .then((data) => {
+        setProducts(data.products);
+        setSortedProducts(data.products)
+        console.log(data.products);
+      })
+      .catch((error) => {
+        console.log('Error fetching products:', error);
+      });
+  }, []);
   return (
     <div className={styles.listWrapper}>
-    
-    <div className={styles.controlsWrapper}>
+      <div className={styles.controlsWrapper}>
         <label htmlFor='category'>Filter by category:</label>
         <select
           id='category'
@@ -43,7 +77,7 @@ function ProductList() {
           value={selectedCategory}
           onChange={handleCategorySelect}
         >
-          <option value=''>All</option>
+          <option value=''>Select category</option>
           { categories.map((category, index) => (
             <option key={index} value={category}>
               {category}
@@ -51,24 +85,33 @@ function ProductList() {
            ))
           }
         </select>
+
+        <label>Sort by price: </label>
+        <button onClick={handelsort}
+        className={styles.sortbtn} >
+        {sortDirection === 'asc' ? 'Low to high' : 'High to low'}
+        {/* if sort direcction is ascending then text on the button is low to high otherwise its high to low */}
+        </button>
+
+
       </div>
-
-<div className={styles.cardsWrapper}>
-    {products
-    
-    .filter((product) => selectedCategory == '' || product.category === selectedCategory)
-    .map((product) => (
-        <ProductCard key ={product.id} product={product} />
-    )
-
-    )}
-    
-    
+      <div className={styles.cardsWrapper}>
+        {sortedProducts
+          .filter((product) => selectedCategory == '' || product.category === selectedCategory)
+          .map((product) => (
+            <ProductCard key={ product.id } product={ product } />
+          ))
+        }
+      </div>
+      <button
+        className={styles.actionBtn}
+        onClick={() => fetchMoreProducts(limit, currentPage)}
+        disabled={currentPage > 3}
+      >
+        Load more...
+      </button>
     </div>
-    
-    </div>
-    
-  )
+  );
 }
 
 export default ProductList
